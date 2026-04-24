@@ -1,0 +1,71 @@
+MediSense Pro — Heart Disease Module v11
+=========================================
+Student: R. Divya (21MIS0261) | VIT | SWE1904
+
+INSTALL:
+  Copy pages/heart.py into your medisense_pro/pages/ folder
+  (Replace the existing heart.py)
+
+  Then run as normal:
+    cd medisense_pro
+    streamlit run app.py
+
+WHAT'S NEW vs old heart.py:
+  7 Clinical Holes Solved:
+
+  1. Emergency Triage TAB (NEW)
+     - 5 yes/no questions for active heart attack
+     - 3+ YES = full red screen + CALL 108 NOW
+     - 2 YES = go to hospital emergency now
+     - 1 YES = see doctor today
+
+  2. Home Cardiac Screener TAB (NEW)
+     - Uses what a person has at home
+     - BP machine + glucometer + smartwatch + symptoms
+     - WHO SCORE-India risk factors
+     - LDL/HDL ratio (not just total cholesterol)
+     - Smoking, alcohol, stress, family history, lifestyle
+     - Stable vs Unstable Angina distinction
+     - Factor-by-factor breakdown panel
+
+  3. Clinical ML Model TAB (kept, improved)
+     - Original Cleveland dataset ML model unchanged
+     - Explainable AI panel unchanged
+     - Added cholesterol type education box
+     - Added stable/unstable angina distinction for clinical mode
+     - Added "where to get each value" info box
+
+DEMO TEST VALUES:
+  Home Screener — High Risk:
+    Age:55, Male, Weight:85kg, Height:170cm
+    BP: 148/94, Fasting Sugar: 145
+    Chol: 240, HDL: 35 (ratio 6.9 = Very High Risk)
+    Resting HR: 94, Sleep: 5.5, Steps: 2800
+    Smoking: Current smoker (daily)
+    Family: Father/brother heart attack before 55
+    Pain: Pressure/tightness during exertion
+    Symptoms: Breathlessness, Palpitations
+    Expected: High Risk, Score 90+
+
+  Home Screener — Healthy:
+    Age:30, Female, Weight:60kg, Height:165cm
+    BP: 112/74, Sugar: 85, Chol: 170, HDL: 65
+    HR: 68, Sleep: 8, Steps: 9500
+    Never smoked, No family history, No pain
+    Expected: Low Risk, Score 0-15
+
+  Emergency Triage — Heart Attack:
+    Tick: Q1 (chest pain now) + Q3 (cold sweat) + Q4 (breathless)
+    Expected: CALL 108 NOW full red screen
+
+  Clinical ML — Positive:
+    Age:63, Male, CP:Typical Angina, BP:145, Chol:233
+    FBS:No, ECG:LV Hypertrophy, Max HR:150, ExAngina:No
+    ST Depression:2.3, Slope:Flat, Vessels:0, Thal:Reversible
+    Expected: Positive (Severe)
+
+  Clinical ML — Negative:
+    Age:40, Female, CP:Asymptomatic, BP:120, Chol:190
+    FBS:No, ECG:Normal, Max HR:165, ExAngina:No
+    ST Depression:0.0, Slope:Upsloping, Vessels:0, Thal:Normal
+    Expected: Negative (Mild)
